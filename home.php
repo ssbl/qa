@@ -13,7 +13,7 @@
     <form id="qinstant">
       <input type="text" placeholder="Ask away!">
 
-      <button type="submit" value="Submit" name="submit">Post question</button>
+      <button type="button" name="submit">Post question</button>
     </form>
     <br>
 
@@ -21,15 +21,18 @@
     <?php
     $con = new mysqli("localhost", "shubhaml", "", "qa");
 
-    if ($con->connect_error) { die("Error connecting to DB" . mysqli_error()); }
+    if ($con->connect_error) { die("Error connecting to DB: " . mysqli_error()); }
 
     $results = $con->query("SELECT * FROM category ORDER BY likes DESC LIMIT 5");
 
+    /* List top 5 categories and number of `likes' */
+    echo "<ul>";
     while ($row = $results->fetch_array()) {
-        print "<p> ";
-        print $row["name"] . " ";
-        print $row["likes"] . "</p><br>";
+        print "<li><a href='category.php?category=" . $row["name"] . "'>";
+        print $row["name"] . "</a> (";
+        print $row["likes"] . ")</li><br>";
     }
+    echo "</ul>";
     
     ?>
     <div align="center">
