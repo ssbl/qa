@@ -1,0 +1,20 @@
+Comp Science
+1)What is the scope of Computer Science?
+2)What is RAID?
+3)How do you use FTP?
+Chemistry
+1)What are the uses of Sulphuric acid?
+2)What are the uses of Hydrochloric acid?
+3)What is the composition of diamond?
+Physics
+1)What is dark matter?
+2)What is CERN?
+3)Is the Large Hadron Collider really a massive invention?
+Politics
+1)Impact of Modi in India? 
+2)Which countries are in the UN?
+3)What is the exact definition of a third world country? 
+Programming
+1)Is Java a pure OO language? 
+2)Is C++ a OO language?  
+3)How useful is Python?
