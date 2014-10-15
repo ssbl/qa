@@ -11,7 +11,11 @@ $stm = "SELECT * FROM answers WHERE name='$category' AND qid = '$question'";
 
 $rows = $con->query($stm);
 while ($row = $rows->fetch_array()) {
-    /* show answers */
+        $answer_id = $row["answer_id"];
+        $url = "category=" . urlencode($category) . "&question=" .
+               urlencode($question_id);
+        print '<p>' . $row["answer_text"];
+        print "</p><br>";
 }
 
 $rows->free();
