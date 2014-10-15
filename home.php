@@ -19,7 +19,7 @@
 
     <h3>Popular categories</h3>
     <?php
-    $con = new mysqli("localhost", "shubhaml", "", "qa");
+    $con = new mysqli("localhost", "devshubh", "", "qa");
 
     if ($con->connect_error) { die("Error connecting to DB: " . mysqli_error()); }
 
@@ -28,11 +28,16 @@
     /* List top 5 categories and number of `likes' */
     echo "<ul>";
     while ($row = $results->fetch_array()) {
-        print "<li><a href='category.php?category=" . $row["name"] . "'>";
+        $category = $row["name"];
+        $url = 'category=' . urlencode($category);
+        print '<li><a href="category.php?' . htmlentities($url) . '">';
         print $row["name"] . "</a> (";
         print $row["likes"] . ")</li><br>";
     }
     echo "</ul>";
+
+    $results->free();
+    $con->close();
     
     ?>
     <div align="center">

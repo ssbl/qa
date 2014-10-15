@@ -1,18 +1,35 @@
-<?php
-/* echo "You selected the " . htmlspecialchars($_GET["category"]) . " category!"; */
-$category = htmlspecialchars($_GET["category"]);
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title><?php echo htmlspecialchars($_GET["category"]) ?> | QA</title>
+  </head>
 
-if ($category == null) { die("Category does not exist!"); }
+  <body>
+    <?php
+    $category = htmlspecialchars($_GET["category"]);
+    if ($category == null) { die("Category does not exist!"); }
 
-$con = new mysqli("localhost", "devshubh", "", "qa");
-if ($con->connect_error) { die("Could not connect to DB: " . mysqli_error()); }
+    $con = new mysqli("localhost", "devshubh", "", "qa");
+    if ($con->connect_error) {
+        die("Could not connect to DB: " . mysqli_error());
+    }
 
-$stm = $con->query("SELECT qtext,qid FROM questions WHERE name = " . $category);
-echo "<ul>";
-while ($row = $stm->fetch_array()) {
-        print "<li><a href='question.php?category=$row["name"]" . $row["qtext"] . "'>";
-        print $row["qtext"] . "</a> (";
-	print $row["qid"] . ")</li><br>";
-	}
-echo "</ul>";
-?>
+    $stm = "SELECT qid,qtext FROM questions WHERE name='$category'";
+    $rows = $con->query($stm);
+
+    echo "<ul>";
+    while ($row = $rows->fetch_array()) {
+        $question_id = $row["qid"];
+        $url = "category=" . urlencode($category) . "&question=" .
+               urlencode($question_id);
+        print '<li><a href="question.php?' . $url . '">' . $row["qtext"];
+        print "</a></li><br>";
+    }
+    echo "</ul>\n";
+
+    $rows->free();
+    $con->close();
+    ?>
+  </body>
+</html>
