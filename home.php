@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,6 +11,7 @@
   <body>
     <h1>QA Homepage</h1>
     <p>A simple question-and-answer website.</p>
+    <p><?php echo '<em>Welcome, </em> ' . $_SESSION['user'] . '.'; ?></p>
     <hr>
     <form id="qinstant" action="addq.php" method="post">
       <input type="text" name="qtext" placeholder="Ask away!">

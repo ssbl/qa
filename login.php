@@ -1,3 +1,32 @@
+<?php
+$con = new mysqli("localhost", "devshubh", "", "qa");
+$error = '';
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $con->real_escape_string($_POST["username"]);
+    $password = $con->real_escape_string($_POST["pwd"]);
+
+    $stm = $con->prepare('SELECT Username,Password FROM user ' .
+           'WHERE Username = ? ' .
+           'AND Password = ?') or die("Query error: " . mysqli_error());
+    $stm->bind_param('ss', $username, $password);
+    $stm->execute();
+    $stm->bind_result($db_username, $db_password);
+    $stm->fetch();
+    $stm->close();
+
+    if ($username !== $db_username || $password != $db_password) {
+        $error = '<br><p style="color: red">Invalid username or password.</p>';
+    }
+    else {
+        $_SESSION['user'] = $username;
+
+        header('Location: ' . 'http://localhost/qa/home.php');
+    }
+}    
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,17 +40,16 @@
 
   <body>
     <div class="container">
-      <form id="login-form" role="form">
+      <form id="login-form" role="form" action="login.php" method="post">
         <div class="row">
           <div class="col-md-4 col-md-offset-4">
-            <h2>Welcome</h2>
-          </div>
+            <h2>Login</h2>
         </div>
         
         <div class="row">
           <div class="col-xs-6 col-md-4 col-md-offset-4">
             <div class="form-group">
-              <input type="email" class="form-control" name="email" placeholder="Email" />
+              <input type="text" class="form-control" name="username" placeholder="Username" />
             </div>
           </div>
         </div>
@@ -30,6 +58,7 @@
           <div class="col-xs-6 col-md-4 col-md-offset-4">
             <div class="form-group">
               <input type="password" class="form-control" name="pwd" placeholder="Password" />
+              <?php echo $error; ?>
             </div>
           </div>
         </div>
