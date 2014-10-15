@@ -15,12 +15,12 @@ create table questions (
 );
 create table answers (
        answer_id int not null auto_increment primary key,
+       qid int,
        answer_text text,
        name char(50) not null,
-       qtext char(100) not null,
        UserId int not null,
        foreign key category_name (name) references category (name),
-       qid int, foreign key question_id (qid) references questions (qid),
+       foreign key question_id (qid) references questions (qid),
        foreign key userID (UserId) references user (UserId)
 );
 /* now run populate.sql */
