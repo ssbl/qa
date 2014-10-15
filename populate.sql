@@ -30,10 +30,6 @@ SET qid = 1233
 WHERE answer_id = 1233;
 
 UPDATE answers
-SET qid = 1233
-WHERE answer_id = 1233;
-
-UPDATE answers
 SET qid = 1234
 WHERE answer_id = 1234;
 
