@@ -28,7 +28,8 @@ $stm = $con->prepare("INSERT INTO questions (name,qtext,userID) VALUES " .
 $stm->bind_param('ssd', $category, $qtext, $user);
 $stm->execute();
 
-$new_url = "http://" . $domain . "/question.php?category=" . urlencode($category) . "&question=" . urlencode($con->insert_id);
+$new_url = "http://" . $domain . "/question.php?category=" .
+           urlencode($category) . "&question=" . urlencode($con->insert_id);
 
 echo $new_url;
 echo "Question added!";
