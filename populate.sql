@@ -12,3 +12,11 @@ INSERT INTO questions (name,qtext,userID) VALUES ('Computer Science','How do you
 INSERT INTO questions (name,qtext,userID) VALUES ('Chemistry','What are the uses of sulphuric acid?', 1234);
 INSERT INTO questions (name,qtext,userID) VALUES ('Chemistry','What are the uses of hydrochloric acid?', 1234);
 INSERT INTO questions (name,qtext,userID) VALUES ('Chemistry','What is the composition of diamond?', 1234);
+
+INSERT INTO answers (answer_id,answer_text,name,qtext,userID) VALUES (1232,'It has a vast scope.','Computer Science','What is the scope of Computer Science?', 1234);
+INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('Redundant array of Independent disks','Computer Science','What is RAID?', 1234);
+INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('explanation','Computer Science','How do you use FTP?', 1234);
+
+INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('uses','Chemistry','What are the uses of sulphuric acid?', 1234);
+INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('uses again','Chemistry','What are the uses of hydrochloric acid?', 1234);
+INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('composition','Chemistry','What is the composition of diamond?', 1234);
