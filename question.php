@@ -43,3 +43,5 @@ $stm2->close();
     $con->close();
 
     ?>
+  </body>
+</html>
