@@ -36,16 +36,16 @@ session_start();
 
     if ($con->connect_error) { die("Error connecting to DB: " . mysqli_error()); }
 
-    $results = $con->query("SELECT * FROM category ORDER BY likes DESC LIMIT 5");
+    $results = $con->query("SELECT * FROM category ORDER BY views DESC LIMIT 5");
 
-    /* List top 5 categories and number of 'likes' */
+    /* List top 5 categories and number of views */
     echo "<ul>";
     while ($row = $results->fetch_array()) {
         $category = $row["name"];
         $url = 'category=' . urlencode($category);
         print '<li><a href="category.php?' . $url . '">';
         print $row["name"] . "</a> (";
-        print $row["likes"] . ")</li><br>";
+        print $row["views"] . ")</li><br>";
     }
     echo "</ul>";
 

@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+$con = new mysqli("localhost", "devshubh", "", "qa") or die("Connection error" .
+       mysqli_error());
+$stm2 = $con->prepare("UPDATE category SET views = views + 1 WHERE name = ?");
+$stm2->bind_param('s', $_GET["category"]);
+$stm2->execute();
+
+$stm2->close();
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,13 +19,8 @@
 
   <body>
     <?php
-    $category = htmlspecialchars($_GET["category"]);
+    $category = $_GET["category"];
     if ($category == null) { die("Category does not exist!"); }
-
-    $con = new mysqli("localhost", "devshubh", "", "qa");
-    if ($con->connect_error) {
-        die("Could not connect to DB: " . mysqli_error());
-    }
 
     $stm = "SELECT qid,qtext FROM questions WHERE name='$category'";
     $rows = $con->query($stm);
