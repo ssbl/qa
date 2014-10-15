@@ -1,8 +1,8 @@
 <?php
 $domain = "localhost/qa";
 
-$qtext = $_POST["qtext"];
-if ($qtext == null) { die("Error."); }
+$answer_text = $_POST["answer_text"];
+if ($answer_text == null) { die("Error."); }
 
 if (isset($_POST["category"])) {
     $category = $_POST["category"];
