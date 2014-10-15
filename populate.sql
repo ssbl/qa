@@ -20,3 +20,31 @@ INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('explanation','Compu
 INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('uses','Chemistry','What are the uses of sulphuric acid?', 1234);
 INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('uses again','Chemistry','What are the uses of hydrochloric acid?', 1234);
 INSERT INTO answers (answer_text,name,qtext,userID) VALUES ('composition','Chemistry','What is the composition of diamond?', 1234);
+
+UPDATE answers
+SET qid = 1232
+WHERE answer_id = 1232;
+
+UPDATE answers
+SET qid = 1233
+WHERE answer_id = 1233;
+
+UPDATE answers
+SET qid = 1233
+WHERE answer_id = 1233;
+
+UPDATE answers
+SET qid = 1234
+WHERE answer_id = 1234;
+
+UPDATE answers
+SET qid = 1235
+WHERE answer_id = 1235;
+
+UPDATE answers
+SET qid = 1236
+WHERE answer_id = 1236;
+
+UPDATE answers
+SET qid = 1237
+WHERE answer_id = 1237;
