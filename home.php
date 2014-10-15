@@ -10,10 +10,10 @@
     <p>A simple question-and-answer website.</p>
     <hr>
 
-    <form id="qinstant">
-      <input type="text" placeholder="Ask away!">
+    <form id="qinstant" action="addq.php" method="post">
+      <input type="text" name="qtext" placeholder="Ask away!">
 
-      <button type="button" name="submit">Post question</button>
+      <button type="submit" name="submit">Post question</button>
     </form>
     <br>
 

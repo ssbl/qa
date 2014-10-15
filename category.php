@@ -23,7 +23,8 @@
         $question_id = $row["qid"];
         $url = "category=" . urlencode($category) . "&question=" .
                urlencode($question_id);
-        print '<li><a href="question.php?' . $url . '">' . $row["qtext"];
+        print '<li><a href="question.php?' . htmlentities($url) .
+               '">' . $row["qtext"];
         print "</a></li><br>";
     }
     echo "</ul>\n";
