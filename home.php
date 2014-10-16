@@ -20,37 +20,39 @@ session_start();
     <a href="" class="close" data-dismiss="alert">&times;</a>
     <strong>Hello!</strong>     Welcome to the website!
 </div>
-<div class="container">
-  <nav class="navbar navbar-default">
-       
-      <div class="container-fluid">
-        <div class="navbar-header" >
-          <a class="navbar-brand" >QA</a>
-        </div>
-        <div>
-	</div>
-	
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="home.php">Home</a></li>
-            <li><a href="Register.php">Register</a></li>
-            <li><a href="login.php">Login</a></li>
-            <li><a href="About.php">About</a></li>
-          </ul>
-	  </div>
-	 
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="#">QA</a>
+   </div>
+   <div>
+      <ul class="nav navbar-nav">
+      	   <li><a href="home.php">Home</a></li>
+         <li class="active"><a href="Register.php">Register</a></li>
+         <li><a href="login.php">Login</a></li>
+          <li><a href="about.html">About</a></li>
+	   
+      </ul>
+   </div>
+</nav>
 	  
-	<div class="container">
+	
 	<div class="jumbotron">
-	<img src="random.png" class="img-responsive" align="right" alt ="Logo" width="180" height="180">
+	<div class="bg-success">
+	<div class="container" >
+	
+	<img src="random.png" class="img-responsive" align="right" alt ="Logo" width="250" height="250">
 	     <div class="col-xs-6 col-md-4 col-md-offset-4">
-    <h1>QA Homepage</h1>
+   <br> <h1>QA Homepage</h1>
     
     <p>A simple question-and-answer website.</p>
-    <p><?php echo '<em>Welcome, </em> ' . $_SESSION['user'] . '.'; ?></p>
+    
+    <p><?php echo '<em>Welcome </em> ' . $_SESSION['user'] . '.'; ?></p>
     <hr>
 	</div>
 	</div>
 	</div>
+	
+	
     <form id="qinstant" action="addq.php" method="post">
 
       <input type="text" name="qtext" placeholder="Ask away!" class="form-control">
@@ -70,7 +72,7 @@ session_start();
      <br> <button type="submit" name="submit"class="btn btn-info btn-lg" >Post question</button>
     </form>
     <br>
-
+    <div class="form-group">
     <h3><span class="glyphicon glyphicon-star-empty"></span>Popular Categories</h3>
     <?php
     $con = new mysqli("localhost", "devshubh", "", "qa");
@@ -93,14 +95,21 @@ session_start();
     $results->free();
     $con->close();
     
-    ?>
-    <div align="center">
-      <a href="faq.html">FAQ</a>
+    ?></div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="footer">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="#">QA</a>
+   </div>
+   <div>
+      <ul class="nav navbar-nav">
+      	   <li><a href="home.php">Home</a></li>
+         <li class="active"><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+	   
+      </ul>
+   </div>
+</nav>
 
-    </div>
-
-    <div id="footer">
-      <p align="center"><small>--footer text--</small></p>
-    </div>
+    
   </body>
 </html>

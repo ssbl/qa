@@ -29,7 +29,7 @@ $stm2->close();
       <h2><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>
       <?php
-	if(isset(!_SESSION['user'])
+	if(isset(!_SESSION['user']))
 	echo'You have not logged in';
 	else{
 	$con = new mysqli ("localhost","devshubh","","qa") or die(mysqli_error($con)); 
