@@ -29,11 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stm3->close();
 
         /* Adding the answer */
-        $answer_text = mysqli_real_escape_string($_POST['txtDesc']);
+        if (! isset($_POST['txtDesc']) ) { die("Error."); }
+        $answer_text = $_POST['txtDesc'];
         $stm4 = $con->prepare("INSERT INTO answers (answer_text,qid,UserId" .
                 ",name) VALUES (?,?,?,?)");
         $stm4->bind_param('sdds', $answer_text, $question, $userID, $category);
         $stm4->execute();
+        $stm4->close();
 
         header('Location: ' . 'http://localhost/qa/question.php?category=' .
                 urlencode($category) . '&question=' . urlencode($question));
@@ -53,23 +55,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <h2><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>
     </div>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-	<textarea name="txtDesc" row="50" cols="50" id="txtDesc" wrap="hard"></textarea><br><br>
+    <?php
+    $form_action_url = 'question.php?category=' . urlencode($category) .
+                       '&question=' . urlencode($question);
+    ?>
+    <form action="<?php echo $form_action_url; ?>" method="post">
+	<input type="text" name="txtDesc" placeholder="Your answer..."/><br><br>
 	<input type="submit" value="Add answer" name="submit"><br><br>
 	</form>
     <?php
-    $stm = $con->prepare("SELECT answer_id, answer_text  FROM answers WHERE name = ? AND qid = ?");
+    $stm = $con->prepare("SELECT UserId, answer_text  FROM answers WHERE name = ? AND qid = ?");
     $stm->bind_param('sd', $category, $question);
     $stm->execute();
-    $stm->bind_result($answer_id, $answer_text);
+    $stm->bind_result($user, $answer_text);
 
     while ($stm->fetch()) {
-        /* $url = "category=" . urlencode($category) . "&question=" .
-           urlencode($question); */
-        echo htmlspecialchars($answer_text);
+        echo '<p><b>[' . $user . ' answered]</b> ';
+        echo htmlspecialchars($answer_text) . '</p><br>';
     }
 
     $stm->close();
+    /* $stm5->close(); */
     $con->close();
 
     ?>
