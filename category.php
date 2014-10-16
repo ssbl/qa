@@ -49,8 +49,9 @@ $stm2->close();
         </div>
       </div>
     </div>
-    <br><br><br><br>
+    <br><br><br>
     <div class="container">
+      <h1><?php echo htmlspecialchars($_GET['category']); ?></h1>
       <div class="row">
         <div class="col-md-4">
       <?php
