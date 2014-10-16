@@ -12,18 +12,18 @@ session_start();
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
-  <body style="background-color:  #DA6C47">
+  <body>
     <div class="alert alert-warning">
       <a href="" class="close" data-dismiss="alert">&times;</a>
       <strong>Hello!</strong>     Welcome to the website!
     </div>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation"style="background-color: #FF9933">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">QA</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
-      	  <li class="active"><a href="home.php"style="background-color: #CCCC00">Home</a></li>
+      	  <li class="active"><a href="home.php">Home</a></li>
           <li><a href="Register.php">Register</a></li>
           <li><a href="login.php">Login</a></li>
           <li><a href="about.html">About</a></li>
@@ -31,14 +31,12 @@ session_start();
         </ul>
       </div>
     </nav>
-	  
-	
-	<div class="jumbotron"style="background-color:  #DA6C47">
-	  <div class="bg-success"style="background-color:  #DA6C47">
-	    <div class="container" style="background-color:  #DA6C47">
+	<div class="jumbotron">
+	  <div class="bg-success">
+	    <div class="container">
 	      
 	      <img src="random.png" class="img-responsive" align="right" alt ="Logo" width="250" height="250">
-	      <div class="col-xs-6 col-md-4 col-md-offset-4"style="background-color: #47CCCC">
+	      <div class="col-xs-6 col-md-4 col-md-offset-4">
             <br> <h1>QA Homepage</h1>
             <p>A simple question-and-answer website.</p>
             <p><?php echo '<em>Welcome </em> ' . $_SESSION['user'] . '.'; ?></p>
@@ -48,19 +46,19 @@ session_start();
 	  </div>
       <form id="qinstant" action="addq.php" method="post">
         <div style="padding: 20px 200px 10px 100px;">
-          <br> <input type="text" name="qtext" placeholder="Ask away!" class="form-control"style="background-color: #B8B894"></div>
+          <br> <input type="text" name="qtext" placeholder="Ask away!" class="form-control"></div>
           <br>
           <?php
           $con = new mysqli("localhost", "devshubh", "", "qa");
           if ($con->connect_error) { die("Error connecting to DB: " . mysqli_error()); }
           $results = $con->query("SELECT * FROM category");
           echo' <div style="padding: 20px 200px 10px 100px;">';
-          echo '<select name="category" class="form-control"style="background-color: #B8B894">';
+          echo '<select name="category" class="form-control">';
           while ($row = $results->fetch_array()) {
               $category = $row["name"];
               echo "<option>" . $category . "</option>";
           }
-          echo' "</select>"</div>';
+          echo '</select></div>';
           ?>
           <br> <button type="submit" name="submit" class="btn btn-info btn-lg">Post question</button>
       </form>
@@ -78,7 +76,7 @@ session_start();
       while ($row = $results->fetch_array()) {
           $category = $row["name"];
           $url = 'category=' . urlencode($category);
-          print '<li><a style="font-size: 20px;color:#66FF33;" href="category.php?' . $url . '">';
+          print '<li><a href="category.php?' . $url . '">';
           print $row["name"] . "</a> (";
           print $row["views"] . ")</li><br>";
       }
@@ -88,13 +86,13 @@ session_start();
     $con->close();
     
     ?></div>
-    <nav class="navbar navbar-default navbar-fixed-bottom" role="footer" style="background-color:  #FF9933">
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="footer">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">QA</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
-      	  <li class="active"><a href="home.php"style="background-color: #CCCC00">Home</a></li>
+      	  <li class="active"><a href="home.php">Home</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact Us</a></li>
 	      

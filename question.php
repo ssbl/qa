@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
     <div style="padding: 20px 200px 10px;">
       <form action="<?php echo $form_action_url; ?>" method="post">
-	    <textarea class="form-control" name="txtDesc" row="50" cols="50" placeholder="Your answer..." wrap="hard">
-        </textarea><br><br>
+	    <textarea class="form-control" name="txtDesc" row="50" cols="50" placeholder="Your answer..."
+                  wrap="hard"></textarea><br><br>
 	    <input class="form-control" type="submit" value="Add answer" name="submit"><br><br>
 	  </form>
     </div>
@@ -84,9 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $stm->close();
-    /* $stm5->close(); */
     $con->close();
-
     ?>
   </body>
 </html>
