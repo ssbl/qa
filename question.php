@@ -46,24 +46,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
   <head>
+   <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
     <title><?php echo htmlspecialchars($qtext); ?> | QA</title>
   </head>
 
-  <body>
-    <div id="header">
-      <h2><?php echo htmlspecialchars($qtext); ?></h2>
+  <body style="background-color:  #DA6C47">
+  <a href="home.php" style="font-size: 20px" align="right"><span class="glyphicon glyphicon-home"></span>  Home</a>
+    <div id="header" class="form-group">
+      <h2 align="center"><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>
     </div>
     <?php
     $form_action_url = 'question.php?category=' . urlencode($category) .
                        '&question=' . urlencode($question);
     ?>
-    <form action="<?php echo $form_action_url; ?>" method="post">
-	  <textarea name="txtDesc" row="50" cols="50" placeholder="Your answer..." wrap="hard">
-      </textarea><br><br>
-	  <input type="submit" value="Add answer" name="submit"><br><br>
-	</form>
+    <div style="padding: 20px 200px 10px;">
+      <form action="<?php echo $form_action_url; ?>" method="post">
+	    <textarea class="form-control" name="txtDesc" row="50" cols="50" placeholder="Your answer..." wrap="hard">
+        </textarea><br><br>
+	    <input class="form-control" type="submit" value="Add answer" name="submit"><br><br>
+	  </form>
+    </div>
     <?php
     $stm = $con->prepare("SELECT UserId, answer_text  FROM answers WHERE name = ? AND qid = ?");
     $stm->bind_param('sd', $category, $question);
