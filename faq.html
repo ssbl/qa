@@ -1,0 +1,37 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+<title>Frequently asked questions</title>
+</head>
+<body>
+  <h1 align="center">Frequently asked questions</h1>
+<script>
+
+function toggleElement(id)
+{
+    if(document.getElementById(id).style.display == 'none')
+    {
+        document.getElementById(id).style.display = '';
+    }
+    else
+    {
+        document.getElementById(id).style.display = 'none';
+    }
+}
+</script>
+<p>
+<a href="javascript:toggleElement('a1')">What is this site about?</a><br><br><br>
+<a href="javascript:toggleElement('a2')">Who created this site?</a><br><br><br>
+<a href="javascript:toggleElement('a3')">Who is this site for?</a><br><br><br>
+</p>
+<div id="a1" style="display:none">
+This is an answer.
+</div>
+<div id="a2" style="display:none">
+This is an answer.
+</div>
+<div id="a3" style="display:none">
+This is an answer.
+</div>
+</body>
+</html>
