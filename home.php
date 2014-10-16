@@ -4,7 +4,7 @@ session_start();
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HOME | QA</title>
+    <title>Home | QA</title>
     <meta name="viewport" content="width=device-width, initial-scale=2.0" >
     
     <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
