@@ -60,8 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        '&question=' . urlencode($question);
     ?>
     <form action="<?php echo $form_action_url; ?>" method="post">
-	<input type="text" name="txtDesc" placeholder="Your answer..."/><br><br>
-	<input type="submit" value="Add answer" name="submit"><br><br>
+	  <textarea name="txtDesc" row="50" cols="50" placeholder="Your answer..." wrap="hard">
+      </textarea><br><br>
+	  <input type="submit" value="Add answer" name="submit"><br><br>
 	</form>
     <?php
     $stm = $con->prepare("SELECT UserId, answer_text  FROM answers WHERE name = ? AND qid = ?");
