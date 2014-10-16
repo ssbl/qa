@@ -1,11 +1,22 @@
 <?php
 session_start();
+if (isset($_SESSION['user'])) { $logged_in = true; }
+else {
+    header('Location: ' . 'http://localhost/qa/login.php');
+}
+
 $question = $_GET["question"];
 $category = $_GET["category"];
 
 if ($question == null or $category == null) { die("Question not found."); }
 $con = new mysqli("localhost", "devshubh", "", "qa");
 if ($con->connect_error) { die("Could not connect to DB" . mysqli_error()); }
+
+$stm2 = $con->prepare("UPDATE category SET views = views + 1 WHERE name = ?");
+$stm2->bind_param('s', $_GET["category"]);
+$stm2->execute();
+
+$stm2->close();
 
 $stm2 = $con->prepare("SELECT qtext, qdescription FROM questions WHERE qid = ?");
 $stm2->bind_param('d', $question);
@@ -16,7 +27,7 @@ $stm2->close();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (! isset($_SESSION['user'])) {
-        /* Redirect to registration */
+
     }
     else {
         /* Getting the user ID */
@@ -49,14 +60,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
     <title><?php echo htmlspecialchars($qtext); ?> | QA</title>
   </head>
 
   <body style="background-color: #B8B894">
-  <a href="home.php" style="font-size: 20px" align="right"><span class="glyphicon glyphicon-home"></span>  Home</a>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header" >
+          <p class="navbar-brand">QA</p>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+      	    <li class="active"><a href="home.php">Home</a></li>
+            <?php
+            if ($logged_in) {
+                echo '<li><a href="logout.php">Logout</a></li>';
+            }
+            else {
+                header('Location: ' . 'http://localhost/qa/login.php');
+            }
+            ?>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+            <li><a href="about.php">About</a></li>
+	        <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br><br><br>
     <div id="header" class="form-group">
       <h2 align="center"><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>

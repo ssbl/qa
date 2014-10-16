@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli("localhost", "devshubh", "", "qa");
+$con = new mysqli("localhost", "devshubh", "", "qa") or die("Connection error.");
 $error = '';
 session_start();
 
@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
           <div class="col-xs-6 col-md-4 col-md-offset-4">
           <button type="submit" class="btn btn-info btn-lg">Submit</button>
+          <a class="btn btn-default btn-lg" role="button" href="Register.php">Register</a>
           </div>
         </div>
       </form>
