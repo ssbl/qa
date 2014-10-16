@@ -1,11 +1,22 @@
 <?php
 session_start();
+if (isset($_SESSION['user'])) { $logged_in = true; }
+else {
+    header('Location: ' . 'http://localhost/qa/login.php');
+}
+
 $question = $_GET["question"];
 $category = $_GET["category"];
 
 if ($question == null or $category == null) { die("Question not found."); }
 $con = new mysqli("localhost", "devshubh", "", "qa");
 if ($con->connect_error) { die("Could not connect to DB" . mysqli_error()); }
+
+$stm2 = $con->prepare("UPDATE category SET views = views + 1 WHERE name = ?");
+$stm2->bind_param('s', $_GET["category"]);
+$stm2->execute();
+
+$stm2->close();
 
 $stm2 = $con->prepare("SELECT qtext, qdescription FROM questions WHERE qid = ?");
 $stm2->bind_param('d', $question);
@@ -16,7 +27,7 @@ $stm2->close();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (! isset($_SESSION['user'])) {
-        /* Redirect to registration */
+
     }
     else {
         /* Getting the user ID */
@@ -29,11 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stm3->close();
 
         /* Adding the answer */
-        $answer_text = mysqli_real_escape_string($_POST['txtDesc']);
+        if (! isset($_POST['txtDesc']) ) { die("Error."); }
+        $answer_text = $_POST['txtDesc'];
         $stm4 = $con->prepare("INSERT INTO answers (answer_text,qid,UserId" .
                 ",name) VALUES (?,?,?,?)");
         $stm4->bind_param('sdds', $answer_text, $question, $userID, $category);
         $stm4->execute();
+        $stm4->close();
 
         header('Location: ' . 'http://localhost/qa/question.php?category=' .
                 urlencode($category) . '&question=' . urlencode($question));
@@ -44,34 +57,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
   <head>
+   <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <meta charset="utf-8">
     <title><?php echo htmlspecialchars($qtext); ?> | QA</title>
   </head>
 
-  <body>
-    <div id="header">
-      <h2><?php echo htmlspecialchars($qtext); ?></h2>
+  <body style="background-color: #B8B894">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header" >
+          <p class="navbar-brand">QA</p>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+      	    <li class="active"><a href="home.php">Home</a></li>
+            <?php
+            if ($logged_in) {
+                echo '<li><a href="logout.php">Logout</a></li>';
+            }
+            else {
+                header('Location: ' . 'http://localhost/qa/login.php');
+            }
+            ?>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+            <li><a href="about.php">About</a></li>
+	        <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br><br><br>
+    <div id="header" class="form-group">
+      <h2 align="center"><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>
     </div>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-	<textarea name="txtDesc" row="50" cols="50" id="txtDesc" wrap="hard"></textarea><br><br>
-	<input type="submit" value="Add answer" name="submit"><br><br>
-	</form>
     <?php
-    $stm = $con->prepare("SELECT answer_id, answer_text  FROM answers WHERE name = ? AND qid = ?");
+    $form_action_url = 'question.php?category=' . urlencode($category) .
+                       '&question=' . urlencode($question);
+    ?>
+    <div style="padding: 20px 200px 10px;">
+      <form action="<?php echo $form_action_url; ?>" method="post">
+	    <textarea class="form-control" name="txtDesc" row="50" cols="50" placeholder="Your answer..."
+                  wrap="hard"></textarea><br><br>
+	    <input class="form-control" type="submit" value="Add answer" name="submit"><br><br>
+	  </form>
+    </div>
+    <?php
+    $stm = $con->prepare("SELECT UserId, answer_text  FROM answers WHERE name = ? AND qid = ?");
     $stm->bind_param('sd', $category, $question);
     $stm->execute();
-    $stm->bind_result($answer_id, $answer_text);
+    $stm->bind_result($user, $answer_text);
 
     while ($stm->fetch()) {
-        /* $url = "category=" . urlencode($category) . "&question=" .
-           urlencode($question); */
-        echo htmlspecialchars($answer_text);
+        echo '<p><b>[' . $user . ' answered]</b> ';
+        echo htmlspecialchars($answer_text) . '</p><br>';
     }
 
     $stm->close();
     $con->close();
-
     ?>
   </body>
 </html>

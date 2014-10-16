@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli("localhost", "devshubh", "", "qa");
+$con = new mysqli("localhost", "devshubh", "", "qa") or die("Connection error.");
 $error = '';
 session_start();
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body style="background-color: #B8B894">
     <div class="container">
       <form id="login-form" role="form" action="login.php" method="post">
         <div class="row">
@@ -65,7 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="row">
           <div class="col-xs-6 col-md-4 col-md-offset-4">
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-info btn-lg">Submit</button>
+          <a class="btn btn-default btn-lg" role="button" href="Register.php">Register</a>
           </div>
         </div>
       </form>
