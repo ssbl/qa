@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title><?php echo htmlspecialchars($qtext); ?> | QA</title>
   </head>
 
-  <body style="background-color:  #DA6C47">
+  <body style="background-color: #B8B894">
   <a href="home.php" style="font-size: 20px" align="right"><span class="glyphicon glyphicon-home"></span>  Home</a>
     <div id="header" class="form-group">
       <h2 align="center"><?php echo htmlspecialchars($qtext); ?></h2>
