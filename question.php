@@ -1,9 +1,7 @@
 <?php
 session_start();
-?>
-<?php
-$question = htmlspecialchars($_GET["question"]);
-$category = htmlspecialchars($_GET["category"]);
+$question = $_GET["question"];
+$category = $_GET["category"];
 
 if ($question == null or $category == null) { die("Question not found."); }
 $con = new mysqli("localhost", "devshubh", "", "qa");
@@ -15,41 +13,51 @@ $stm2->execute();
 $stm2->bind_result($qtext, $qdesc);
 $stm2->fetch();
 $stm2->close();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (! isset($_SESSION['user'])) {
+        /* Redirect to registration */
+    }
+    else {
+        /* Getting the user ID */
+        $user = $_SESSION['user'];
+        $stm3 = $con->prepare("SELECT UserId FROM user WHERE Username = ?");
+        $stm3->bind_param('s', $user);
+        $stm3->execute();
+        $stm3->bind_result($userID);
+        $stm3->fetch();
+        $stm3->close();
+
+        /* Adding the answer */
+        $answer_text = mysqli_real_escape_string($_POST['txtDesc']);
+        $stm4 = $con->prepare("INSERT INTO answers (answer_text,qid,UserId" .
+                ",name) VALUES (?,?,?,?)");
+        $stm4->bind_param('sdds', $answer_text, $question, $userID, $category);
+        $stm4->execute();
+
+        header('Location: ' . 'http://localhost/qa/question.php?category=' .
+                urlencode($category) . '&question=' . urlencode($question));
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta charset="utf-8">
     <title><?php echo htmlspecialchars($qtext); ?> | QA</title>
   </head>
-  
+
   <body>
     <div id="header">
       <h2><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>
-      <?php
-	if(isset(!_SESSION['user']))
-	echo'You have not logged in';
-	else{
-	$con = new mysqli ("localhost","devshubh","","qa") or die(mysqli_error($con)); 
-    	$sql = "SELECT UserId from user where Username=_SESSION['user']" ;
-}	
-        $category = ($_GET["category"]);
-	$question = ($_GET["question"]);
-      	if(isset($_POST['txtDesc'])){
-        $con = new mysqli ("localhost","devshubh","","qa") or die(mysqli_error($con)); 
-    	$desc = mysqli_real_escape_string($con,$_POST['txtDesc']);
-    	$sql = "INSERT INTO answers (answer_text,qid,name) VALUES ('$desc','$question','$category')" ;
-    	$result = mysqli_query($con,$sql) or die(mysqli_error($con));
-}
-?>
-	<form method="POST" action="">
-	<textarea name="txtDesc" row = "50" cols = "50" id="txtDesc" wrap="hard"></textarea><br><br>
-	<input type="submit" value="submit" name="submit"><br><br>
+    </div>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+	<textarea name="txtDesc" row="50" cols="50" id="txtDesc" wrap="hard"></textarea><br><br>
+	<input type="submit" value="Add answer" name="submit"><br><br>
 	</form>
     <?php
-
     $stm = $con->prepare("SELECT answer_id, answer_text  FROM answers WHERE name = ? AND qid = ?");
     $stm->bind_param('sd', $category, $question);
     $stm->execute();
@@ -61,7 +69,7 @@ $stm2->close();
         echo htmlspecialchars($answer_text);
     }
 
-   $stm->close();
+    $stm->close();
     $con->close();
 
     ?>
