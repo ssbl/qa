@@ -26,7 +26,7 @@ $stm2->close();
   <h1 align="center">Questions</h1>
   <br>
   <hr>
-  <body style="background-color:  #DA6C47">
+  <body style="background-color: #B8B894">
     <?php
     $category = $_GET["category"];
     if ($category == null) { die("Category does not exist!"); }
@@ -39,7 +39,7 @@ $stm2->close();
         $question_id = $row["qid"];
         $url = "category=" . urlencode($category) . "&question=" .
                urlencode($question_id);
-        print '<li><a style="font-size: 20px; color:#66FF33;" href="question.php?' . htmlentities($url) .
+        print '<li><a style="font-size: 20px; color:teal;" href="question.php?' . htmlentities($url) .
                '">' . $row["qtext"];
         print "</a></li><br>";
     }
