@@ -14,24 +14,25 @@ $stm2->execute();
 $stm2->close();
 ?>
 
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html style="height: 100%;">
   <head>
-   <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title><?php echo $_GET["category"] ?> | QA</title>
   </head>
-  <body style="background-color: #B8B894">
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <body style="background-image:url(bg.jpg); height:100%; font-family: 'Corben', Georgia, Times, serif;">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #B6B6CF">
       <div class="container">
         <div class="navbar-header" >
           <p class="navbar-brand">QA</p>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-      	    <li class="active"><a href="home.php">Home</a></li>
+      	    <li class="active"><a href="home.php" style="background-color: #B6B6CF">Home</a></li>
             <?php
             if ($logged_in) {
                 echo '<li><a href="logout.php">Logout</a></li>';
@@ -43,8 +44,8 @@ $stm2->close();
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
             <li><a href="about.php">About</a></li>
-	        <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+	        <li><a href="faq.php">FAQ</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
           </ul>
         </div>
       </div>
@@ -54,27 +55,27 @@ $stm2->close();
       <h1><?php echo htmlspecialchars($_GET['category']); ?></h1>
       <div class="row">
         <div class="col-md-4">
-      <?php
-      $category = $_GET["category"];
-      if ($category == null) { die("Category does not exist!"); }
+          <?php
+          $category = $_GET["category"];
+          if ($category == null) { die("Category does not exist!"); }
+          $category = mysqli_real_escape_string($con, $category);
+          $stm = "SELECT qid,qtext FROM questions WHERE name='$category'";
+          $rows = $con->query($stm);
 
-      $stm = "SELECT qid,qtext FROM questions WHERE name='$category'";
-      $rows = $con->query($stm);
+          echo "<ul>";
+          while ($row = $rows->fetch_array()) {
+              $question_id = $row["qid"];
+              $url = "category=" . urlencode($category) . "&question=" .
+                     urlencode($question_id);
+              print '<li><a style="font-size: 20px; color:orange;" href="question.php?' . htmlentities($url) .
+                     '">' . $row["qtext"];
+              print "</a></li><br>";
+          }
+          echo "</ul>\n";
 
-      echo "<ul>";
-      while ($row = $rows->fetch_array()) {
-          $question_id = $row["qid"];
-          $url = "category=" . urlencode($category) . "&question=" .
-                 urlencode($question_id);
-          print '<li><a style="font-size: 20px; color:teal;" href="question.php?' . htmlentities($url) .
-                 '">' . $row["qtext"];
-          print "</a></li><br>";
-      }
-      echo "</ul>\n";
-
-      $rows->free();
-      $con->close();
-      ?>
+          $rows->free();
+          $con->close();
+          ?>
         </div>
       </div>
     </div>

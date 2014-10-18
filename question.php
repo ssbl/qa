@@ -55,8 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
   <head>
+<link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+ <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">	     
    <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -64,15 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title><?php echo htmlspecialchars($qtext); ?> | QA</title>
   </head>
 
-  <body style="background-color: #B8B894">
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <body style="background-image:url(bg.jpg); height:100%; font-family: 'Corben', Georgia, Times, serif;">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #B6B6CF">
       <div class="container">
         <div class="navbar-header" >
           <p class="navbar-brand">QA</p>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-      	    <li class="active"><a href="home.php">Home</a></li>
+      	    <li class="active"><a href="home.php" style="background-color: #B6B6CF">Home</a></li>
             <?php
             if ($logged_in) {
                 echo '<li><a href="logout.php">Logout</a></li>';
@@ -84,14 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
             <li><a href="about.php">About</a></li>
-	        <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+	        <li><a href="faq.php">FAQ</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
           </ul>
         </div>
       </div>
     </div>
     <br><br><br>
-    <div id="header" class="form-group">
+    <div id="header" class="container">
       <h2 align="center"><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>
     </div>
@@ -105,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   wrap="hard"></textarea><br><br>
 	    <input class="form-control" type="submit" value="Add answer" name="submit"><br><br>
 	  </form>
-    </div>
+
     <?php
     $stm = $con->prepare("SELECT UserId, answer_text  FROM answers WHERE name = ? AND qid = ?");
     $stm->bind_param('sd', $category, $question);
@@ -120,5 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stm->close();
     $con->close();
     ?>
+    </div>
   </body>
 </html>

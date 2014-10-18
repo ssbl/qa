@@ -27,9 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }    
 ?>
 
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html style="height: 100%;">
+<html style="height: 100%;">
   <head>
+  <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+ <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
     <title>Login | QA</title>
     <meta name="viewport" content="device-width, initial-scale=1.0" >
     
@@ -38,8 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
-  <body style="background-color: #B8B894">
+  <body style="background-color: #B8B894; font-family: 'Corben', Georgia, Times, serif;">
     <div class="container">
+    <h1 align="center">QA Website.</h1><hr>
       <form id="login-form" role="form" action="login.php" method="post">
         <div class="row">
           <div class="col-md-4 col-md-offset-4">
@@ -66,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
           <div class="col-xs-6 col-md-4 col-md-offset-4">
           <button type="submit" class="btn btn-info btn-lg">Submit</button>
-          <a class="btn btn-default btn-lg" role="button" href="Register.php">Register</a>
+          <a class="btn btn-info btn-lg" role="button" href="Register.php">Register</a>
           </div>
         </div>
       </form>
