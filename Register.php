@@ -39,9 +39,11 @@ else {
 }
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html style="height: 100%;">
 <html>
   <head>
+<link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+ <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">	
   <script type="text/javascript">
   function myFunction() {
       var pwd = document.getElementById("pwd").value;
@@ -68,7 +70,7 @@ else {
    
   </head>
 
-  <body style="background-color: #B8B894">
+  <body style="background-color: #B8B894; font-family: 'Corben', Georgia, Times, serif;">
     <div class="container">
       <form id="login-form" role="form" action="Register.php" method="post" onsubmit="return myFunction();">
         <div class="row">

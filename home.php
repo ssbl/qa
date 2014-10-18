@@ -8,25 +8,26 @@ else {
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Home | QA</title>
+      <title>Home | QA</title>
     <meta name="viewport" content="width=device-width, initial-scale=2.0" >
-    
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+ <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
     <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
   </head>
-  <body style="background-color: #B8B894">
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header" >
+  <body style="font-family: 'Corben', Georgia, Times, serif; background-image:url(random.jpg);">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #B6B6CF">
+      <div class="container" >
+        <div class="navbar-header"  >
           <p class="navbar-brand">QA</p>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-      	    <li class="active"><a href="home.php">Home</a></li>
+          <ul class="nav navbar-nav" >
+      	    <li class="active"><a href="home.php" style="background-color: #B6B6CF">Home</a></li>
             <?php
             if ($logged_in) {
-                echo '<li><a href="logout.php">Logout</a></li>';
+                echo '<li><a href="logout.php" style="background-color: #B6B6CF">Logout</a></li>';
             }
             else {
                 header('Location: ' . 'http://localhost/qa/login.php');
@@ -35,13 +36,13 @@ else {
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
             <li><a href="about.php">About</a></li>
-	        <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+	        <li><a href="faq.php">FAQ</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
           </ul>
         </div>
       </div>
     </div>
-	<div class="jumbotron" style="background-color: #B8B894">
+	<div class="jumbotron" style="background-image:url(random.jpg);">
       <div class="row">
         <div class="col col-md-6 col-md-offset-4">
           <h1>QA Homepage</h1>
@@ -94,7 +95,7 @@ else {
           while ($row = $results->fetch_array()) {
               $category = $row["name"];
               $url = 'category=' . urlencode($category);
-              print '<li><a style="font-size: 20px; color:teal;" href="category.php?' . $url . '">';
+              print '<li><a style="font-size: 20px; color: orange;" href="category.php?' . $url . '">';
               print $row["name"] . "</a> (";
               print $row["views"] . ")</li><br>";
           }
@@ -107,5 +108,6 @@ else {
     </div>
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    
   </body>
 </html>
