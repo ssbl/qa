@@ -8,10 +8,10 @@ else {
 <!DOCTYPE html>
 <html>
   <head>
-      <title>Home | QA</title>
+    <title>Home | QA</title>
     <meta name="viewport" content="width=device-width, initial-scale=2.0" >
     <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
- <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
     <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -44,7 +44,7 @@ else {
     </div>
 	<div class="jumbotron" style="background-image:url(random.jpg);">
       <div class="row">
-        <div class="col col-md-6 col-md-offset-4">
+        <div class="col col-md-5 col-md-offset-4">
           <h1>QA Homepage</h1>
           <p>A simple question-and-answer website.</p>
           <p><?php echo '<em>Welcome </em> ' . $_SESSION['user'] . '.'; ?></p>

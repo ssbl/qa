@@ -16,9 +16,9 @@ $stm2->close();
 
 <!DOCTYPE html style="height: 100%;">
   <head>
-  <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
- <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
-   <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -54,27 +54,27 @@ $stm2->close();
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-      <?php
-      $category = $_GET["category"];
-      if ($category == null) { die("Category does not exist!"); }
+          <?php
+          $category = $_GET["category"];
+          if ($category == null) { die("Category does not exist!"); }
+          $category = mysqli_real_escape_string($con, $category);
+          $stm = "SELECT qid,qtext FROM questions WHERE name='$category'";
+          $rows = $con->query($stm);
 
-      $stm = "SELECT qid,qtext FROM questions WHERE name='$category'";
-      $rows = $con->query($stm);
+          echo "<ul>";
+          while ($row = $rows->fetch_array()) {
+              $question_id = $row["qid"];
+              $url = "category=" . urlencode($category) . "&question=" .
+                     urlencode($question_id);
+              print '<li><a style="font-size: 20px; color:orange;" href="question.php?' . htmlentities($url) .
+                     '">' . $row["qtext"];
+              print "</a></li><br>";
+          }
+          echo "</ul>\n";
 
-      echo "<ul>";
-      while ($row = $rows->fetch_array()) {
-          $question_id = $row["qid"];
-          $url = "category=" . urlencode($category) . "&question=" .
-                 urlencode($question_id);
-          print '<li><a style="font-size: 20px; color:orange;" href="question.php?' . htmlentities($url) .
-                 '">' . $row["qtext"];
-          print "</a></li><br>";
-      }
-      echo "</ul>\n";
-
-      $rows->free();
-      $con->close();
-      ?>
+          $rows->free();
+          $con->close();
+          ?>
         </div>
       </div>
     </div>

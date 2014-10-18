@@ -8,9 +8,9 @@ else {
 <!DOCTYPE HTML style="height: 100%;">
 <html style="height: 100%;">
   <head>
-<link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
- <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
-    <title>CONTACT US | QA</title>
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+    <title>Contact Us | QA</title>
     <meta name="viewport" content="width=device-width, initial-scale=2.0" >
     
     <link href="css/bootstrap-fluid-adj.css" rel="stylesheet">
@@ -46,10 +46,11 @@ else {
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="container">
    <br><br><br> <h1 align="center">Contact Us</h1>
     <hr>
-    <p>This project was made by Devansh Lala and Shubham Lagwankar for the TSEC WT Project.Contact us at github@Codekrypt or ssbl.</p>
+    <p>This project was made by Devansh Lala and Shubham Lagwankar for the TSEC WT Project.
+      Contact us at github@Codekrypt or ssbl.</p>
     </div>
   </body>
 </html>

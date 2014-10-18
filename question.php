@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </div>
     <br><br><br>
-    <div id="header" class="form-group">
+    <div id="header" class="container">
       <h2 align="center"><?php echo htmlspecialchars($qtext); ?></h2>
       <hr>
     </div>
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   wrap="hard"></textarea><br><br>
 	    <input class="form-control" type="submit" value="Add answer" name="submit"><br><br>
 	  </form>
-    </div>
+
     <?php
     $stm = $con->prepare("SELECT UserId, answer_text  FROM answers WHERE name = ? AND qid = ?");
     $stm->bind_param('sd', $category, $question);
@@ -122,5 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stm->close();
     $con->close();
     ?>
+    </div>
   </body>
 </html>
